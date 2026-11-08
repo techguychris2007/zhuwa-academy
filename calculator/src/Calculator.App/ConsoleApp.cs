@@ -2,11 +2,7 @@ using System.Globalization;
 
 namespace Calculator.App;
 
-/// <summary>
-/// The menu loop. It reads from a TextReader and writes to a TextWriter
-/// instead of using Console directly, so tests can drive it with scripted
-/// input and check the output.
-/// </summary>
+/// This is a calculator and a unit converter app
 public class ConsoleApp
 {
     private static readonly CultureInfo Culture = CultureInfo.InvariantCulture;
@@ -57,7 +53,7 @@ public class ConsoleApp
         _output.Write("Choose an option: ");
     }
 
-    /// <summary>Returns false if the input stream ended.</summary>
+    
     private bool HandleChoice(string choice)
     {
         switch (choice)
