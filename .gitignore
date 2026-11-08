@@ -1,3 +1,10 @@
 __pycache__/
 *.py[cod]
 .venv/
+
+# .NET
+bin/
+obj/
+.vs/
+*.user
+TestResults/
