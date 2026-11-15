@@ -1,5 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+
+# .NET
 bin/
 obj/
-*.user
 .vs/
 .idea/
+*.user
+TestResults/
