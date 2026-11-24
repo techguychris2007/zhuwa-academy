@@ -3,12 +3,14 @@ using GradeTracker;
 
 public class GradeCalculatorTests
 {
-    private static List<Student> Sample() =>
-    [
-        new("Alice",   95),
-        new("Bob",     72),
-        new("Charlie", 55),
-    ];
+    private static (Student[] arr, int count) Sample()
+    {
+        var arr = new Student[10];
+        arr[0] = new("Alice",   95);
+        arr[1] = new("Bob",     72);
+        arr[2] = new("Charlie", 55);
+        return (arr, 3);
+    }
 
     [Theory]
     [InlineData(100, "A")]
@@ -27,26 +29,29 @@ public class GradeCalculatorTests
     [Fact]
     public void Average_calculates_correctly()
     {
+        var (arr, count) = Sample();
         double expected = (95 + 72 + 55) / 3.0;
-        Assert.Equal(expected, GradeCalculator.Average(Sample()), 5);
+        Assert.Equal(expected, GradeCalculator.Average(arr, count), 5);
     }
 
     [Fact]
     public void Highest_returns_max_score()
     {
-        Assert.Equal(95, GradeCalculator.Highest(Sample()));
+        var (arr, count) = Sample();
+        Assert.Equal(95, GradeCalculator.Highest(arr, count));
     }
 
     [Fact]
     public void Lowest_returns_min_score()
     {
-        Assert.Equal(55, GradeCalculator.Lowest(Sample()));
+        var (arr, count) = Sample();
+        Assert.Equal(55, GradeCalculator.Lowest(arr, count));
     }
 
     [Fact]
     public void Single_student_average_equals_their_score()
     {
-        var one = new List<Student> { new("Dana", 88) };
-        Assert.Equal(88, GradeCalculator.Average(one));
+        var arr = new Student[1] { new("Dana", 88) };
+        Assert.Equal(88, GradeCalculator.Average(arr, 1));
     }
 }
