@@ -1,61 +1,43 @@
 # Zhuwa Academy
 
 Assignments for the Zhuwa Software Engineering Training Program.
-Each project is in its own folder with a README covering setup, tests,
-design, assumptions and limitations.
+Each assignment lives in its own folder with a README covering setup, tests,
+design decisions, assumptions and limitations.
 
-| Project | Language | Description |
+All projects target **.NET 8** (the installed SDK on this machine).
+
+| Assignment | Folder | Description |
 |---|---|---|
-| [calculator](calculator/) | C# / .NET 10 | Console calculator and unit converter (km/miles, °C/°F, GHS→USD) |
-| [susu-tracker](susu-tracker/) | Python 3.10+ | Command-line tracker for a rotating savings (susu) group |
-| [GuessingGame](GuessingGame/) | C# / .NET 8 | Random-number guessing game with limited tries |
-| [GradeTracker](GradeTracker/) | C# / .NET 8 | Student grade tracker with repeating menu and statistics |
+| Calculator | [calculator/](calculator/) | Console calculator and unit converter (km/miles, °C/°F, GHS→USD) |
+| Susu tracker | [susu-tracker/](susu-tracker/) | Command-line tracker for a rotating savings (susu) group |
+| Assignment 02 | [assignment-02/](assignment-02/) | Guessing game and grade tracker — arrays, loops, methods |
+| Assignment 03 | [assignment-03/](assignment-03/) | Library management system — OOP with inheritance and polymorphism |
 
 ## Quick start
 
 ```bash
+# Calculator
+dotnet run --project calculator/src/Calculator.App
+
 # Guessing Game
-cd GuessingGame
-dotnet run
+dotnet run --project assignment-02/GuessingGame
 
 # Grade Tracker
-cd GradeTracker
-dotnet run
+dotnet run --project assignment-02/GradeTracker
 
-# Run all tests
-cd ..
-dotnet test ConsoleApps.sln
+# Library System
+dotnet run --project assignment-03/LibrarySystem
 ```
 
----
+## Running tests
 
-## GuessingGame
+```bash
+# Assignment 02
+dotnet test assignment-02/ConsoleApps.sln
 
-- Guess a random number between 1–100 in **7 tries**
-- Each wrong guess gives a "too high" / "too low" hint
-- Play-again prompt after each round
-- Methods: `RunGame`, `PromptGuess`, `DisplayResult`, `AskPlayAgain`
-- Testable logic in `Game.cs` (no console dependency)
+# Assignment 03
+dotnet test assignment-03/LibrarySystem.sln
 
-## GradeTracker
-
-- Stores student names and scores in a `List<Student>` (in-memory)
-- Menu loops until the user quits (option 4)
-- Options: Add student | View all scores | View statistics | Quit
-- Statistics: count, average, highest, lowest score
-- Grade scale: A ≥ 90 · B ≥ 80 · C ≥ 70 · D ≥ 60 · F < 60
-- Testable logic in `GradeCalculator.cs` (no console dependency)
-
-### Architecture
-
+# Calculator
+dotnet test calculator/tests/Calculator.Tests
 ```
-Program.cs          — entry point, menu/game loop, console I/O
-<Logic>.cs          — pure business logic, no console calls (testable)
-<App>.Tests/        — xUnit tests targeting only the logic class
-```
-
-### Assumptions & Known Limitations
-
-- Scores are stored in memory only; they are lost when the app exits.
-- The guessing game range is fixed at 1–100 with 7 tries.
-- Input parsing uses the current culture's decimal separator.
